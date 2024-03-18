@@ -1,26 +1,30 @@
 import React, { useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+import HeroSection from './HeroSection';
 
-const NavBar = () => {
+const NavBar = ({ onNavItemClick }) => {
   const [nav, setNav] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false); // State to manage dropdown visibility
-  const [hoveredItem, setHoveredItem] = useState(null); // State to manage the currently hovered item
+  const [showDropdown, setShowDropdown] = useState(null); // State to manage dropdown visibility
 
   const handleNav = () => {
-    if (nav) {
-      // If the menu is open, close it and reset dropdown
-      setNav(false);
-      setShowDropdown(false);
+    setNav(!nav); // Toggle mobile menu visibility
+  };
+
+  const handleNavItemClick = (item) => {
+    if (item.dropdownItems) {
+      // Show dropdown if the clicked item has dropdown items
+      setShowDropdown(item.id);
     } else {
-      // If the menu is closed, open it
-      setNav(true);
+      // Close mobile menu if the clicked item doesn't have dropdown items
+      setNav(false);
+      setShowDropdown(null);
+      onNavItemClick(item.section);
     }
   };
 
-  // Array containing navigation items
   const navItems = [
-    { id: 1, text: 'Home' },
-    { id: 2, text: 'Menu', dropdownItems: ['Dishes', 'Drinks', 'Desserts', 'Alcohol'] }, // Add dropdown items
+    { id: 1, text: 'Home', section: <HeroSection /> },
+    { id: 2, text: 'Menu', dropdownItems: ['Dishes', 'Drinks', 'Desserts', 'Alcohol'] },
     { id: 3, text: 'About Us' },
     { id: 4, text: 'Gallery' },
     { id: 5, text: 'Reservations' },
@@ -28,22 +32,17 @@ const NavBar = () => {
   ];
 
   return (
-    <div className='  bg-black flex justify-between items-center h-24  mx-auto px-4 text-white relative'>
-      {/* Logo */}
+    <div className='bg-black flex justify-between items-center h-24 mx-auto px-4 text-white relative'>
       <h1 className='w-full text-3xl font-bold text-[#00df9a]'>Flavor Voyage.</h1>
-
-      {/* Desktop Navigation */}
       <ul className='hidden md:flex w-auto'>
         {navItems.map(item => (
           <li
             key={item.id}
             className='p-4 hover:bg-[#00df9a] rounded-xl m-2 cursor-pointer duration-300 hover:text-black relative'
-            onMouseEnter={() => setHoveredItem(item.id)}
-            onMouseLeave={() => setHoveredItem(null)}
+            onClick={() => handleNavItemClick(item)}
           >
             {item.text}
-            {/* Dropdown content */}
-            {hoveredItem === item.id && item.dropdownItems && (
+            {item.dropdownItems && showDropdown === item.id && (
               <ul className='absolute left-0 mt-2 bg-black text-white p-2 rounded-md'>
                 {item.dropdownItems.map((dropdownItem, index) => (
                   <li key={index} className='cursor-pointer hover:bg-[#00df9a] hover:text-black py-1 px-2'>
@@ -55,17 +54,14 @@ const NavBar = () => {
           </li>
         ))}
       </ul>
-
-      {/* Mobile Navigation Icon */}
       <div onClick={handleNav} className='block md:hidden z-10'>
         {nav ? <AiOutlineClose size={40} /> : <AiOutlineMenu size={40} />}
       </div>
-
       {/* Mobile Navigation Menu */}
       <ul
         className={
           nav
-            ? 'fixed md:hidden text-center left-0 top-0 w-[100%] h-full border-r  border-r-gray-900 bg-[#000300] ease-in-out duration-500 z-0'
+            ? 'fixed md:hidden text-center left-0 top-0 w-full h-full bg-[#000300] ease-in-out duration-500 z-0'
             : 'ease-in-out w-[60%] duration-500 fixed top-0 bottom-0 left-[-100%]'
         }
       >
@@ -77,7 +73,7 @@ const NavBar = () => {
           <li
             key={item.id}
             className='p-4 border-b rounded-xl hover:bg-[#00df9a] duration-300 hover:text-black cursor-pointer border-gray-600 relative'
-            onClick={() => setShowDropdown(item.id)} // Toggle dropdown on click
+            onClick={() => handleNavItemClick(item)} // Toggle dropdown on click
           >
             {item.text}
             {/* Show dropdown items as navbar items */}
