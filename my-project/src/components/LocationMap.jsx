@@ -5,7 +5,7 @@ const LocationMap = ({ location, className }) => {
   return (
     <div className={`rounded-xl ${className}`} style={{ height: '400px', width: '100%' }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'YOUR_API_KEY' }} // Replace 'YOUR_API_KEY' with your actual Google Maps API key
+        bootstrapURLKeys={{ key: 'AIzaSyBYZsqlV_22CHOZpljGTKa6UZUxnsPo3j0' }} // Replace 'YOUR_API_KEY' with your actual Google Maps API key
         defaultCenter={location}
         defaultZoom={15}
         draggable={false} // Disable map dragging

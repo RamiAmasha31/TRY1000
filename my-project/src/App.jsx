@@ -3,7 +3,7 @@ import NavbarWithMegaMenu from "./components/Navbar";
 import HeroSection from './components/HeroSection';
 
 export default function App() {
-  const [activeSection, setActiveSection] = useState(null);
+  const [activeSection, setActiveSection] = useState(<HeroSection/>);
 
   const handleNavItemClick = (section) => {
     setActiveSection(section);
