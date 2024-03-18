@@ -17,7 +17,7 @@ export const AboutUsSection = () => {
     ];
 
     return (
-        <section className={`about-us-section h-screen flex justify-center items-center bg-gray-900 text-white py-24 px-4 `}>
+        <section className={`about-us-section h-screen flex justify-center items-center bg-black text-white py-24 px-4 `}>
             <div className="container mx-auto">
                 {content.map((item, index) => (
                     <div key={index} className="mb-12">

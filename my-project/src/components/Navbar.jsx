@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import HeroSection from './HeroSection';
 import AboutUsSection from './AboutUsSection'; // Import the AboutUsSection component
-
+import LocationSection from './LocationSection';
 const NavBar = ({ onNavItemClick }) => {
   const [nav, setNav] = useState(false);
   const [showDropdown, setShowDropdown] = useState(null); // State to manage dropdown visibility
@@ -43,7 +43,7 @@ const NavBar = ({ onNavItemClick }) => {
     { id: 1, text: 'Home', section: <HeroSection /> },
     { id: 2, text: 'Menu', dropdownItems: ['Dishes', 'Drinks', 'Desserts', 'Alcohol'] },
     { id: 3, text: 'About Us' , section:<AboutUsSection/>},
-    { id: 4, text: 'Gallery' },
+    { id: 4, text: 'Location & Hours' ,section:<LocationSection/>},
     { id: 5, text: 'Reservations' },
     { id: 6, text: 'Private Events' },
   ];
