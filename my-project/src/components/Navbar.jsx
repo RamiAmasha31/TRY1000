@@ -4,6 +4,7 @@ import HeroSection from './HeroSection';
 import AboutUsSection from './AboutUsSection'; // Import the AboutUsSection component
 import LocationSection from './LocationSection';
 import ReservationsForm from './ReservationsForm';
+import PrivateEventsForm from './PrivateEventsForm';
 const NavBar = ({ onNavItemClick }) => {
   const [nav, setNav] = useState(false);
   const [showDropdown, setShowDropdown] = useState(null); // State to manage dropdown visibility
@@ -43,12 +44,12 @@ const NavBar = ({ onNavItemClick }) => {
   const navItems = [
     { id: 1, text: 'Home', section: <HeroSection /> },
     { id: 2, text: 'Menu', dropdownItems: ['Dishes', 'Drinks', 'Desserts', 'Alcohol'] },
-    { id: 3, text: 'About Us' , section:<AboutUsSection/>},
-    { id: 4, text: 'Location & Hours' ,section:<LocationSection/>},
-    { id: 5, text: 'Reservations' ,section:<ReservationsForm/>},
-    { id: 6, text: 'Private Events' },
+    { id: 3, text: 'About Us', section: <AboutUsSection /> },
+    { id: 4, text: 'Location & Hours', section: <LocationSection /> },
+    { id: 5, text: 'Reservations', section: <ReservationsForm /> },
+    { id: 6, text: 'Private Events', section: <PrivateEventsForm /> },
   ];
-
+  
   return (
     <div className='bg-black flex justify-between items-center h-24 mx-auto px-4 text-white relative'>
       <h1 className='w-full text-3xl font-bold text-[#00df9a]'>Flavor Voyage.</h1>
