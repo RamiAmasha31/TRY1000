@@ -1,9 +1,9 @@
-// PrivateEventsForm.js
 import React, { useState } from 'react';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import ReservationFormFields from './ReservationFormFields';
 import CustomAlertModal from './CustomAlertModal'; // Import your customized alert component
+import { motion } from 'framer-motion'; // Import framer-motion for animations
 
 const PrivateEventsForm = () => {
   const [formData, setFormData] = useState({
@@ -27,18 +27,18 @@ const PrivateEventsForm = () => {
     //console.log(formData);
 
     try {
-        const firebaseConfig = {
-            apiKey: "AIzaSyCCi75-RJeDgMS17C1qE1StBPyUL85QztA",
-            authDomain: "resturant-94f15.firebaseapp.com",
-            projectId: "resturant-94f15",
-            storageBucket: "resturant-94f15.appspot.com",
-            messagingSenderId: "59447957183",
-            appId: "1:59447957183:web:a14ae5107e9ec34479980a",
-            measurementId: "G-KC29EGQM0Q"
-          };
-          
+      const firebaseConfig = {
+        apiKey: "AIzaSyCCi75-RJeDgMS17C1qE1StBPyUL85QztA",
+        authDomain: "resturant-94f15.firebaseapp.com",
+        projectId: "resturant-94f15",
+        storageBucket: "resturant-94f15.appspot.com",
+        messagingSenderId: "59447957183",
+        appId: "1:59447957183:web:a14ae5107e9ec34479980a",
+        measurementId: "G-KC29EGQM0Q"
+      };
+
       firebase.initializeApp(firebaseConfig);
-      
+
       const db = firebase.firestore();
 
       // Access Firestore collection for private events reservations
@@ -52,21 +52,20 @@ const PrivateEventsForm = () => {
       checkSnapshot.forEach(doc => {
         totalPeople += parseInt(doc.data().numberOfPeople);
       });
-      //console.log(totalPeople);
-      if (totalPeople+formData.numberOfPeople > 300) {
+
+      if (totalPeople + formData.numberOfPeople > 300) {
         setAlertMessage('Sorry! The restaurant capacity is full for the next 2 hours. Please choose a different time.');
-        setShowAlert(true);      
-        
+        setShowAlert(true);
+
         // Reset the form after failed submission
-      setFormData({
-        name: '',
-        email: '',
-        phoneNumber: '',
-        eventType: '',
-        numberOfPeople: '',
-      });
-        
-        
+        setFormData({
+          name: '',
+          email: '',
+          phoneNumber: '',
+          eventType: '',
+          numberOfPeople: '',
+        });
+
         return;
       }
 
@@ -96,7 +95,12 @@ const PrivateEventsForm = () => {
     setShowAlert(false);
   };
   return (
-    <div className="container w-full bg-black h-screen text-white flex flex-col justify-center items-center">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="container w-full bg-black h-screen text-white flex flex-col justify-center items-center"
+    >
       <h2 className="mb-4 text-2xl font-bold text-[#00df9a]">Private Events Reservations</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <ReservationFormFields formData={formData} handleInputChange={handleInputChange} />
@@ -113,7 +117,7 @@ const PrivateEventsForm = () => {
       {showAlert && (
         <CustomAlertModal message={alertMessage} onClose={handleAlertClose} />
       )}
-    </div>
+    </motion.div>
   );
 };
 export default PrivateEventsForm;

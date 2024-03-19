@@ -5,7 +5,13 @@ import AboutUsSection from './AboutUsSection'; // Import the AboutUsSection comp
 import LocationSection from './LocationSection';
 import ReservationsForm from './ReservationsForm';
 import PrivateEventsForm from './PrivateEventsForm';
-const NavBar = ({ onNavItemClick }) => {
+
+import Dishes from './menuItems/Dishes'; // Import the Dishes component
+import Drinks from './menuItems/Drinks'; // Import the Drinks component
+//import Desserts from './menuItems/Desserts'; // Import the Desserts component
+import Alcohol from './menuItems/Alcohol'; // Import the Alcohol component
+
+const NavbarWithMegaMenu = ({ onNavItemClick }) => {
   const [nav, setNav] = useState(false);
   const [showDropdown, setShowDropdown] = useState(null); // State to manage dropdown visibility
   const [hoveredItem, setHoveredItem] = useState(null); // State to manage the currently hovered item
@@ -27,10 +33,26 @@ const NavBar = ({ onNavItemClick }) => {
   };
 
   const handleDropdownItemClick = (dropdownItem) => {
-    // Close mobile menu and trigger action for the clicked dropdown item
+    // Close mobile menu and render the corresponding component for the clicked dropdown item
     setNav(false);
     setShowDropdown(null);
-    onNavItemClick(dropdownItem);
+
+    switch (dropdownItem) {
+      case 'Dishes':
+        onNavItemClick(<Dishes />);
+        break;
+      case 'Drinks':
+        onNavItemClick(<Drinks />);
+        break;
+      case 'Desserts':
+        onNavItemClick(<Desserts />);
+        break;
+      case 'Alcohol':
+        onNavItemClick(<Alcohol />);
+        break;
+      default:
+        break;
+    }
   };
 
   const handleMouseEnter = (itemId) => {
@@ -122,4 +144,4 @@ const NavBar = ({ onNavItemClick }) => {
   );
 };
 
-export default NavBar;
+export default NavbarWithMegaMenu;
