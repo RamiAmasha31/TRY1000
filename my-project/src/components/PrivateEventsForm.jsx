@@ -101,18 +101,18 @@ const PrivateEventsForm = () => {
       exit={{ opacity: 0 }}
       className="container w-full bg-black h-screen text-white flex flex-col justify-center items-center"
     >
-      <h2 className="mb-4 text-2xl font-bold text-[#00df9a]">Private Events Reservations</h2>
+      <h2 className="mb-4 text-2xl font-bold text-[#eba000]">Private Events Reservations</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <ReservationFormFields formData={formData} handleInputChange={handleInputChange} />
         <div className="flex flex-col">
-          <label htmlFor="eventType" className="text-sm font-semibold text-[#00df9a]">Event Type:</label>
+          <label htmlFor="eventType" className="text-sm font-semibold text-[#eba000]">Event Type:</label>
           <input type="text" id="eventType" name="eventType" value={formData.eventType} onChange={handleInputChange} className="px-3 py-2 border rounded-md focus:outline-none text-black" required />
         </div>
         <div className="flex flex-col">
-          <label htmlFor="numberOfPeople" className="text-sm font-semibold text-[#00df9a]">Number of People:</label>
+          <label htmlFor="numberOfPeople" className="text-sm font-semibold text-[#eba000]">Number of People:</label>
           <input type="number" min="0" id="numberOfPeople" name="numberOfPeople" value={formData.numberOfPeople} onChange={handleInputChange} className="px-3 py-2 border rounded-md focus:outline-none text-black" required />
         </div>
-        <button type="submit" className="px-4 py-2 bg-[#00df9a] text-white rounded-md hover:bg-[#00df988d] focus:outline-none ">Submit</button>
+        <button type="submit" className="px-4 py-2 bg-[#eba000] text-white rounded-md hover:bg-[#eba100a5] focus:outline-none ">Submit</button>
       </form>
       {showAlert && (
         <CustomAlertModal message={alertMessage} onClose={handleAlertClose} />

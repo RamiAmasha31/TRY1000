@@ -21,7 +21,7 @@ export const AboutUsSection = () => {
             <div className="container mx-auto">
                 {content.map((item, index) => (
                     <div key={index} className="mb-12">
-                        <h2 className="text-4xl font-bold mb-4 overflow-hidden text-[#00df9a] ">
+                        <h2 className="text-4xl font-bold mb-4 overflow-hidden text-[#eba000] ">
                             {item.title.split('').map((char, index) => (
                                 <span
                                     key={`${char}-${index}`}
